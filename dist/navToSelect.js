@@ -1,4 +1,4 @@
-/*! NavToSelect - v0.1.0 - 2012-10-21
+/*! NavToSelect - v0.2.0 - 2012-10-25
 * https://github.com/KaptinLin/navToSelect
 * Copyright (c) 2012 KaptinLin; Licensed GPL */
 
@@ -9,9 +9,10 @@
 
   // Constructor
   var Plugin = $.navToSelect = function (nav, settings) {
-    this._isBuilded = false;
     this.nav = nav;
     this.$nav = $(nav);
+
+    this._isBuilded = false;
 
     // Merge the settings given by the user with the defaults
     this.settings = $.extend({}, Plugin.defaults, settings);
@@ -24,9 +25,8 @@
   Plugin.defaults = {
     maxLevel: 4,
     prependTo: null,
-    activeClass: 'selected',
+    activeClass: 'active',
     linkSelector: 'a:first',
-    autoSelect: true,
     className: 'nav2select',
     indentString: '&ndash;',
     defaultText: 'Navigate to...',
@@ -44,6 +44,7 @@
     this.build(items);
 
     this.$select.on('change', this.settings.changeEvent);
+
   };
 
   Plugin.prototype.build = function(items){
@@ -61,11 +62,11 @@
 
   Plugin.prototype.generateOptionString = function(item, level){
     var indent = new Array( level ).join( this.settings.indentString);
-    if(item.linkable === false){
-      return '<option value="'+item.value+'" data-linkable="false">'+indent+item.label+'</option>';
-    }else{
-      return '<option value="'+item.value+'">'+indent+item.label+'</option>';
-    }
+
+    return '<option value="'+item.value+'"'+
+      (item.linkable === false?' data-linkable="false"':'')+
+      (item.actived === true?' selected="selected"':'')+
+      '>'+indent+item.label+'</option>';
   };
 
   Plugin.prototype.generateOptionsString = function(items, level){
@@ -109,7 +110,8 @@
         var item = {
           value: self.getItemValue($li),
           label: self.getItemLabel($li),
-          linkable: self.isLinkable($li)
+          linkable: self.isLinkable($li),
+          actived: self.isActived($li)
         };
         if($li.children('ul, ol').length){
           item.items = [];
@@ -137,14 +139,14 @@
     return this.getItemValue($li) !== '#';
   };
 
+  // Check if a item is actived
+  Plugin.prototype.isActived = function($li){
+    return $li.is('.'+this.settings.activeClass);
+  };
+
   // Get link label
   Plugin.prototype.getItemLabel = function($li, level){
     return $li.find(this.settings.linkSelector).text();
-  };
-
-  // Check if under mobile width
-  Plugin.prototype.isMobile = function () {
-    return ($(window).width() < this.options.switchWidth);
   };
 
   // Check if select is builded already

@@ -103,23 +103,6 @@ body {
     max-width: 600px;
     margin: 0 auto;
 }
-nav ul, nav li {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.nav2select { display: none; }
-
-/* Mobile device */
-@media only screen and (max-width: 767px) {
-  nav ul { display: none; }
-  .nav2select { display: block; }
-}
-
-
-
-
-
 
 
 

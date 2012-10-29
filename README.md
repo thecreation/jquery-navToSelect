@@ -5,8 +5,8 @@ navToSelect is jQuery plugin used to convert your website navigation into a sele
 ## Getting Started
 Download the [production version][min] or the [development version][max].
 
-[min]: https://raw.github.com/KaptinLin/navToSelect/master/dist/navToSelect.min.js
-[max]: https://raw.github.com/KaptinLin/navToSelect/master/dist/navToSelect.js
+[min]: https://raw.github.com/KaptinLin/navToSelect/master/dist/jquery.navToSelect.min.js
+[max]: https://raw.github.com/KaptinLin/navToSelect/master/dist/jquery.navToSelect.js
 
 In your web page:
 
@@ -24,7 +24,7 @@ In your web page:
 ### JavaScript
 ```html
 <script src="jquery.js"></script>
-<script src="dist/navToSelect.min.js"></script>
+<script src="dist/jquery.navToSelect.min.js"></script>
 <script>
 jQuery(function($) {
   $("#nav > ul").navToSelect({

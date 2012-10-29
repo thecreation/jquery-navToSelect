@@ -1,4 +1,4 @@
-/*! NavToSelect - v0.2.0 - 2012-10-25
+/*! NavToSelect - v0.2.1 - 2012-10-29
 * https://github.com/KaptinLin/navToSelect
 * Copyright (c) 2012 KaptinLin; Licensed GPL */
 

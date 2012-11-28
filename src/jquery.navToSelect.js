@@ -25,6 +25,7 @@
     linkSelector: 'a:first',
     className: 'nav2select',
     indentString: '&ndash;',
+    indentSpace: true,
     defaultText: 'Navigate to...',
     useOptgroup: false,
     changeEvent: function(){
@@ -58,7 +59,9 @@
 
   Plugin.prototype.generateOptionString = function(item, level){
     var indent = new Array( level ).join( this.settings.indentString);
-
+    if(this.settings.indentSpace) {
+      indent += '&nbsp;';
+    }
     return '<option value="'+item.value+'"'+
       (item.linkable === false?' data-linkable="false"':'')+
       (item.actived === true?' selected="selected"':'')+

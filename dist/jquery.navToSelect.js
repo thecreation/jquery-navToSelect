@@ -1,4 +1,4 @@
-/*! NavToSelect - v0.2.1 - 2012-10-29
+/*! NavToSelect - v0.2.1 - 2012-11-28
 * https://github.com/KaptinLin/navToSelect
 * Copyright (c) 2012 KaptinLin; Licensed GPL */
 
@@ -29,6 +29,7 @@
     linkSelector: 'a:first',
     className: 'nav2select',
     indentString: '&ndash;',
+    indentSpace: true,
     defaultText: 'Navigate to...',
     useOptgroup: false,
     changeEvent: function(){
@@ -62,7 +63,9 @@
 
   Plugin.prototype.generateOptionString = function(item, level){
     var indent = new Array( level ).join( this.settings.indentString);
-
+    if(this.settings.indentSpace) {
+      indent += '&nbsp;';
+    }
     return '<option value="'+item.value+'"'+
       (item.linkable === false?' data-linkable="false"':'')+
       (item.actived === true?' selected="selected"':'')+

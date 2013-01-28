@@ -59,7 +59,7 @@
 
   Plugin.prototype.generateOptionString = function(item, level){
     var indent = new Array( level ).join( this.settings.indentString);
-    if(this.settings.indentSpace) {
+    if(level !== 1 && this.settings.indentSpace) {
       indent += '&nbsp;';
     }
     return '<option value="'+item.value+'"'+

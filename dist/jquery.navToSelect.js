@@ -1,6 +1,6 @@
-/*! NavToSelect - v0.2.1 - 2012-11-28
+/*! NavToSelect - v0.2.1 - 2013-01-28
 * https://github.com/KaptinLin/navToSelect
-* Copyright (c) 2012 KaptinLin; Licensed GPL */
+* Copyright (c) 2013 KaptinLin; Licensed GPL */
 
 (function (document, $, undefined) {
   "use strict";
@@ -63,7 +63,7 @@
 
   Plugin.prototype.generateOptionString = function(item, level){
     var indent = new Array( level ).join( this.settings.indentString);
-    if(this.settings.indentSpace) {
+    if(level !== 1 && this.settings.indentSpace) {
       indent += '&nbsp;';
     }
     return '<option value="'+item.value+'"'+

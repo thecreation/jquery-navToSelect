@@ -28,6 +28,9 @@
     indentSpace: true,
     defaultText: 'Navigate to...',
     useOptgroup: false,
+    getItemLabel: function($li) {
+      return $li.find(this.settings.linkSelector).text();
+    },
     changeEvent: function() {
       if ($(this).data('linkable') !== false) {
         Plugin.goTo(this.value);
@@ -110,7 +113,7 @@
         var $li = $(this);
         var item = {
           value: self.getItemValue($li),
-          label: self.getItemLabel($li),
+          label: self.settings.getItemLabel.call(self, $li),
           linkable: self.isLinkable($li),
           actived: self.isActived($li)
         };

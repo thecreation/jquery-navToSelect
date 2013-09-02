@@ -15,7 +15,7 @@
     var self = this;
     $.extend(self, {
       init: function() {
-        var items = self.getItems(self);
+        var items = self.getItems();
         self.build(items);
 
         self.$select.on('change', self.options.onChange);
@@ -64,7 +64,7 @@
         });
         return options;
       },
-      getItems: function(api) {
+      getItems: function() {
         var items = [];
         if (self.options.placeholder) {
           items = items.concat({
@@ -74,7 +74,7 @@
           });
         }
 
-        items = items.concat(self.options.getItemsFromList(api, self.$element, 1));
+        items = items.concat(self.options.getItemsFromList.call(self, self.$element, 1));
         return items;
       },
 
@@ -91,11 +91,6 @@
       // Check if a item is actived
       isActived: function($li) {
         return $li.is('.' + self.options.activeClass);
-      },
-
-      // Get link label
-      getItemLabel: function($li, level) {
-        return $li.find(self.options.linkSelector).text();
       },
 
       // Check if select is builded already
@@ -120,22 +115,23 @@
     getItemLabel: function($li) {
       return $li.find(this.options.linkSelector).text();
     },
-    getItemsFromList: function(api, $list, level) {
+    getItemsFromList: function($list, level) {
+      var self = this;
       var _items = [];
 
       $list.children().each(function() {
         var $li = $(this);
 
         var item = {
-          value: api.getItemValue($li),
-          label: api.options.getItemLabel.call(api, $li),
-          linkable: api.isLinkable($li),
-          actived: api.isActived($li)
+          value: self.getItemValue($li),
+          label: self.options.getItemLabel.call(self, $li),
+          linkable: self.isLinkable($li),
+          actived: self.isActived($li)
         };
         if ($li.children().length) {
           item.items = [];
           $li.children().each(function() {
-            item.items = item.items.concat(api.options.getItemsFromList(api, $(this), level + 1));
+            item.items = item.items.concat(self.options.getItemsFromList.call(self, $(this), level + 1));
           });
         }
 

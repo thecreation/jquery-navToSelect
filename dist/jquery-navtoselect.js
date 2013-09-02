@@ -1,4 +1,4 @@
-/*! jQuery NavToSelect - v0.2.1 - 2013-08-29
+/*! jQuery NavToSelect - v0.2.1 - 2013-09-02
 * https://github.com/amazingSurge/jquery-navToSelect
 * Copyright (c) 2013 amazingSurge; Licensed GPL */
 (function(window, document, $, undefined) {
@@ -15,16 +15,17 @@
     var self = this;
     $.extend(self, {
       init: function() {
-        var items = self.getItems();
+        var items = self.getItems(self);
         self.build(items);
 
-        self.$select.on('change', self.options.changeEvent);
+        self.$select.on('change', self.options.onChange);
+        self.$element.trigger('navToSelect::ready');
 
       },
       build: function(items) {
         self.$select = $('<select />', {
-          'class': self.options.className
-        }).html(self.generateOptionsString(items, 1));
+          'class': self.options.namespace
+        }).html(self.buildOptions(items, 1));
 
         if (self.options.prependTo === null) {
           self.$element.after(self.$select);
@@ -33,7 +34,7 @@
         }
         self._isBuilded = true;
       },
-      generateOptionString: function(item, level) {
+      buildOption: function(item, level) {
         var indent = new Array(level).join(self.options.indentString);
         if (level !== 1 && self.options.indentSpace) {
           indent += '&nbsp;';
@@ -43,7 +44,7 @@
           (item.actived === true ? ' selected="selected"' : '') +
           '>' + indent + item.label + '</option>';
       },
-      generateOptionsString: function(items, level) {
+      buildOptions: function(items, level) {
         if (level > self.options.maxLevel) {
           return '';
         }
@@ -51,54 +52,29 @@
         $.each(items, function(index, item) {
           if (item.linkable === false && typeof item.items !== 'undefined' && level === 1 && self.options.useOptgroup) {
             options += '<optgroup label="' + item.label + '">';
-            options += self.generateOptionsString(item.items, level + 1);
+            options += self.buildOptions(item.items, level + 1);
             options += '</optgroup>';
           }
           if (typeof item.items !== 'undefined') {
-            options += self.generateOptionString(item, level);
-            options += self.generateOptionsString(item.items, level + 1);
+            options += self.buildOption(item, level);
+            options += self.buildOptions(item.items, level + 1);
           } else {
-            options += self.generateOptionString(item, level);
+            options += self.buildOption(item, level);
           }
         });
         return options;
       },
-      getItems: function() {
+      getItems: function(api) {
         var items = [];
-        if (self.options.defaultText) {
+        if (self.options.placeholder) {
           items = items.concat({
             value: "#",
-            label: self.options.defaultText,
+            label: self.options.placeholder,
             linkable: false
           });
         }
 
-        //recursion
-
-        function _getItemsFromList($list, level) {
-          var _items = [];
-
-          $list.children('li').each(function() {
-            var $li = $(this);
-            var item = {
-              value: self.getItemValue($li),
-              label: self.options.getItemLabel.call(self, $li),
-              linkable: self.isLinkable($li),
-              actived: self.isActived($li)
-            };
-            if ($li.children('ul, ol').length) {
-              item.items = [];
-              $li.children('ul, ol').each(function() {
-                item.items = item.items.concat(_getItemsFromList($(this), level + 1));
-              });
-            }
-
-            _items.push(item);
-          });
-          return _items;
-        }
-
-        items = items.concat(_getItemsFromList(self.$element, 1));
+        items = items.concat(self.options.getItemsFromList(api, self.$element, 1));
         return items;
       },
 
@@ -136,18 +112,40 @@
     prependTo: null,
     activeClass: 'active',
     linkSelector: 'a:first',
-    className: 'nav2select',
     indentString: '&ndash;',
     indentSpace: true,
-    defaultText: 'Navigate to...',
+    placeholder: 'Navigate to...',
     useOptgroup: false,
     namespace: 'navToSelect',
     getItemLabel: function($li) {
       return $li.find(this.options.linkSelector).text();
     },
-    changeEvent: function() {
+    getItemsFromList: function(api, $list, level) {
+      var _items = [];
+
+      $list.children().each(function() {
+        var $li = $(this);
+
+        var item = {
+          value: api.getItemValue($li),
+          label: api.options.getItemLabel.call(api, $li),
+          linkable: api.isLinkable($li),
+          actived: api.isActived($li)
+        };
+        if ($li.children().length) {
+          item.items = [];
+          $li.children().each(function() {
+            item.items = item.items.concat(api.options.getItemsFromList(api, $(this), level + 1));
+          });
+        }
+
+        _items.push(item);
+      });
+      return _items;
+    },
+    onChange: function() {
       if ($(this).data('linkable') !== false) {
-        NavToSelect.goTo(this.value);
+        document.location.href = this.value;
       }
     }
   };
@@ -155,14 +153,13 @@
   NavToSelect.prototype = {
     constructor: NavToSelect,
 
+    getSelect: function() {
+      return this.$select;
+    },
     destroy: function() {
+      this.$select.remove();
       this.$element.data('NavToSelect', null);
     }
-  };
-
-  // Go to page
-  NavToSelect.goTo = function(url) {
-    document.location.href = url;
   };
 
   // Collection method.

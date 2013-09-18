@@ -1,10 +1,6 @@
-/*
- * navToSelect
- * https://github.com/amazingsurge/jquery-navToSelect
- *
- * Copyright (c) 2013 amazingsurge
- * Licensed under the GPL license.
- */
+/*! jQuery NavToSelect - v0.2.1 - 2013-09-02
+ * https://github.com/amazingSurge/jquery-navToSelect
+ * Copyright (c) 2013 amazingSurge; Licensed GPL */
 
 (function(window, document, $, undefined) {
   'use strict';
@@ -25,7 +21,6 @@
 
         self.$select.on('change', self.options.onChange);
         self.$element.trigger('navToSelect::ready');
-
       },
       build: function(items) {
         self.$select = $('<select />', {
@@ -124,7 +119,7 @@
       var self = this;
       var _items = [];
 
-      $list.children().each(function() {
+      $list.children('li').each(function() {
         var $li = $(this);
 
         var item = {
@@ -133,9 +128,9 @@
           linkable: self.isLinkable($li),
           actived: self.isActived($li)
         };
-        if ($li.children().length) {
+        if ($li.children('ul, ol').length) {
           item.items = [];
-          $li.children().each(function() {
+          $li.children('ul, ol').each(function() {
             item.items = item.items.concat(self.options.getItemsFromList.call(self, $(this), level + 1));
           });
         }

@@ -2,7 +2,7 @@
   "name": "jquery-navtoselect",
   "title": "jQuery NavToSelect",
   "description": "navToSelect is jQuery plugin used to convert your website navigation into a select drop-down menu for small screen devices.",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "homepage": "https://github.com/amazingSurge/jquery-navToSelect",
    "author": {
     "name": "amazingSurge",

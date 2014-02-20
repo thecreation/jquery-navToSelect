@@ -1,10 +1,6 @@
-/*! jQuery NavToSelect - v0.2.1 - 2013-09-18
+/*! jQuery NavToSelect - v0.2.2 - 2014-02-20
 * https://github.com/amazingSurge/jquery-navToSelect
-* Copyright (c) 2013 amazingSurge; Licensed GPL */
-/*! jQuery NavToSelect - v0.2.1 - 2013-09-02
- * https://github.com/amazingSurge/jquery-navToSelect
- * Copyright (c) 2013 amazingSurge; Licensed GPL */
-
+* Copyright (c) 2014 amazingSurge; Licensed GPL */
 (function(window, document, $, undefined) {
   'use strict';
 
@@ -24,6 +20,13 @@
 
         self.$select.on('change', self.options.onChange);
         self.$element.trigger('navToSelect::ready');
+
+        /* fix orientation change issue */
+        $(window).on("orientationchange", function() {
+          if (self.$select.is(':hidden') && self.$select.is(':focus')) {
+            self.$select.blur();
+          }
+        });
       },
       build: function(items) {
         self.$select = $('<select />', {

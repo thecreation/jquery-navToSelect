@@ -1,9 +1,6 @@
 /*! jQuery NavToSelect - v0.2.3 - 2014-02-28
 * https://github.com/amazingSurge/jquery-navToSelect
 * Copyright (c) 2014 amazingSurge; Licensed GPL */
-/*! jQuery NavToSelect - v0.2.2 - 2014-02-20
- * https://github.com/amazingSurge/jquery-navToSelect
- * Copyright (c) 2014 amazingSurge; Licensed GPL */
 (function(window, document, $, undefined) {
   'use strict';
 
@@ -121,7 +118,7 @@
     placeholder: 'Navigate to...',
     useOptgroup: false,
     namespace: 'navToSelect',
-    itemRule: function($li) {
+    itemFilter: function($li) {
       return true;
     },
     getItemLabel: function($li) {
@@ -133,7 +130,7 @@
 
       $list.children('li').each(function() {
         var $li = $(this);
-        if (!self.options.itemRule($li)) {
+        if (!self.options.itemFilter($li)) {
           return;
         }
         var item = {

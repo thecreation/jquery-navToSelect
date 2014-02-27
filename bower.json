@@ -1,6 +1,6 @@
 {
   "name": "jquery-navToSelect",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "main": "dist/jquery-navtoselect.js",
   "ignore": [
     "**/.*",

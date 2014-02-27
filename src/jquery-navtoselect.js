@@ -1,3 +1,6 @@
+/*! jQuery NavToSelect - v0.2.2 - 2014-02-20
+ * https://github.com/amazingSurge/jquery-navToSelect
+ * Copyright (c) 2014 amazingSurge; Licensed GPL */
 (function(window, document, $, undefined) {
   'use strict';
 
@@ -115,6 +118,9 @@
     placeholder: 'Navigate to...',
     useOptgroup: false,
     namespace: 'navToSelect',
+    itemRule: function($li) {
+      return true;
+    },
     getItemLabel: function($li) {
       return $li.find(this.options.linkSelector).text();
     },
@@ -124,7 +130,9 @@
 
       $list.children('li').each(function() {
         var $li = $(this);
-
+        if (!self.options.itemRule($li)) {
+          return;
+        }
         var item = {
           value: self.getItemValue($li),
           label: self.options.getItemLabel.call(self, $li),

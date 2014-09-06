@@ -1,4 +1,4 @@
-/*! jQuery NavToSelect - v0.2.4 - 2014-09-05
+/*! jQuery NavToSelect - v0.2.4 - 2014-09-06
 * https://github.com/amazingSurge/jquery-navToSelect
 * Copyright (c) 2014 amazingSurge; Licensed GPL */
 (function(window, document, $, undefined) {
@@ -173,7 +173,7 @@
     $.fn.navToSelect = function(options) {
         if (typeof options === 'string') {
             var method = options;
-            var method_arguments = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1) : [];
+            var method_arguments = Array.prototype.slice.call(arguments, 1);
 
             if (/^(getSelect)$/.test(method)) {
                 var api = this.first().data('navToSelect');

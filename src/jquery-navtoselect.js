@@ -1,8 +1,8 @@
 /*
  * scrollToTop
- * https://github.com/amazingsurge/jquery-navToSelect
+ * https://github.com/amazingSurge/jquery-navToSelect
  *
- * Copyright (c) 2014 amazingsurge
+ * Copyright (c) 2014 amazingSurge
  * Licensed under the GPL license.
  */
 (function(window, document, $, undefined) {

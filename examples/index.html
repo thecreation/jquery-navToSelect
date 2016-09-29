@@ -1,0 +1,179 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>navToSelect.js</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/rainbow.css">
+  <link rel="stylesheet" href="../dist/css/navToSelect.css">
+  <style type="text/css">
+    nav ul,
+    nav li {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  </style>
+  <script src="js/jquery.js"></script>
+  <script src="../dist/jquery-navToSelect.js"></script>
+  <script src="js/rainbow.min.js"></script>
+</head>
+<body>
+  <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <article class="wrap">
+    <h1>navToSelect.js</h1>
+    <p>navToSelect is jQuery plugin used to convert your website navigation into a select drop-down menu for small screen devices.</p>
+    <section>
+      <h2>Usage</h2>
+      <section>
+        <h3>1. HTML structure</h3>
+        <pre><code data-language="html">&lt;ul id="nav"&gt;
+&lt;li&gt;&lt;a href="homepage.html"&gt;Homepage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="about.html" class="active"&gt;About us&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="contact.html"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+      </section>
+      <section>
+        <h3>2. CSS</h3>
+        <pre><code data-language="css">/* default style */
+.navToSelect { display: none; }
+/* Mobile device */
+@media only screen and (max-width: 767px) {
+  #nav { display: none; }
+  .navToSelect { display: block; }
+}</code></pre>
+      </section>
+      <section>
+        <h3>3. JavaScript</h3>
+        <pre><code data-language="javascript">/* default style */
+&lt;script src="js/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/navToSelect.js"&gt;&lt;/script&gt;</code></pre>
+      </section>
+    </section>
+    <section>
+      <h2>Examles</h2>
+      <article>
+        <h3>Example 1</h3>
+        <section>
+          <div>
+            <nav id="example-1">
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li>
+                  <a href="cats.html">Categories</a>
+                  <ul>
+                    <li><a href="cat-1.html">Category 1</a></li>
+                    <li><a href="cat-2.html">Category 2</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">Page</a>
+                  <ul>
+                    <li><a href="page-1.html">Page 1</a></li>
+                    <li><a href="page-2.html">Page 2</a></li>
+                  </ul>
+                </li>
+                <li><a href="http://google.com">External</a></li>
+                <li><a href="#top">Go to top</a></li>
+              </ul>
+            </nav>
+          </div>
+        </section>
+        <section>
+          <h4>HTML:</h4>
+          <pre><code data-language="html">&lt;nav id="example-1"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="index.html"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;
+            &lt;a href="cats.html"&gt;Category&lt;/a&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="cat-1.html"&gt;Category 1&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="cat-1.html"&gt;Category 1&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;a href="#"&gt;Page&lt;/a&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="page-1.html"&gt;Page 1&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="page-1.html"&gt;Page 1&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href="http://google.com"&gt;External&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#top"&gt;Go to top&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+        </section>
+        <section>
+          <h4>Javascript:</h4>
+          <pre><code data-language="javascript">jQuery(function(){
+    $('#example-1 > ul').navToSelect();
+});</code></pre>
+        </section>
+        <script type="text/javascript">
+          jQuery(function() {
+            $('#example-1 > ul').navToSelect();
+          });
+        </script>
+      </article>
+      <article>
+        <h3>Example 2</h3>
+        <section>
+          <div>
+            <nav id="example-1">
+              <ul>
+                <li><a href="c-1.html">Chapter 1</a>
+                  <ul>
+                    <li><a href="c-1-1.html">Chapter 1.1</a>
+                      <ul>
+                        <li><a href="c-1-1-1.html">Chapter 1.1.1</a></li>
+                        <li><a href="c-1-1-2.html">Chapter 1.1.2</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="c-1-2.html">Chapter 1.2</a></li>
+                  </ul>
+                </li>
+                <li><a href="c-2.html">Chapter 2</a>
+              </ul>
+            </nav>
+          </div>
+        </section>
+        <section>
+          <h4>HTML:</h4>
+          <pre><code data-language="html">&lt;nav id="example-2"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="c-1.html"&gt;Chapter 1&lt;/a&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="c-1-1.html"&gt;Chapter 1.1&lt;/a&gt;
+                    &lt;ul&gt;
+                        &lt;li&gt;&lt;a href="c-1-1-1.html"&gt;Chapter 1.1.1&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href="c-1-1-2.html"&gt;Chapter 1.1.2&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li&gt;&lt;a href="c-1-2.html"&gt;Chapter 1.2&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href="c-2.html"&gt;Chapter 2&lt;/a&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+        </section>
+        <section>
+          <h4>Javascript:</h4>
+          <pre><code data-language="javascript">jQuery(function(){
+    $('#example-2 ul').navToSelect();
+});</code></pre>
+        </section>
+        <script type="text/javascript">
+          jQuery(function() {
+            $('#example-2').navToSelect();
+          });
+        </script>
+      </article>
+    </section>
+  </article>
+</body>
+</html>

@@ -1,0 +1,8 @@
+/**
+* jQuery NavToSelect v0.5.0
+* https://github.com/amazingSurge/jquery-navToSelect
+*
+* Copyright (c) amazingSurge
+* Released under the LGPL-3.0 license
+*/
+.navToSelect{display:none}@media only screen and (max-width:767px){nav ul{display:none}.navToSelect{display:block}}

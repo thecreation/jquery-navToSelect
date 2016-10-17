@@ -1,5 +1,5 @@
 /**
-* jQuery NavToSelect v0.5.0
+* jQuery NavToSelect v0.5.1
 * https://github.com/amazingSurge/jquery-navToSelect
 *
 * Copyright (c) amazingSurge
@@ -69,7 +69,7 @@ class navToSelect {
     this.$element = $$1(element);
     this._isBuilded = false;
 
-    this.options = $$1.extend(DEFAULTS, options);
+    this.options = $$1.extend({}, DEFAULTS, options);
     this.init();
   }
 
@@ -166,7 +166,7 @@ class navToSelect {
   }
 
   trigger(eventType, ...params) {
-    let data = [this].concat(...params);
+    let data = [this].concat(params);
 
     // event
     this.$element.trigger(`${NAMESPACE$1}::${eventType}`, data);
@@ -178,7 +178,7 @@ class navToSelect {
     let onFunction = `on${eventType}`;
 
     if (typeof this.options[onFunction] === 'function') {
-      this.options[onFunction].apply(this, ...params);
+      this.options[onFunction].apply(this, params);
     }
   }
 
@@ -201,7 +201,7 @@ class navToSelect {
 $$1.navToSelect = navToSelect;
 
 var info = {
-  version:'0.5.0'
+  version:'0.5.1'
 };
 
 const NAMESPACE = 'navToSelect';

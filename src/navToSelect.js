@@ -12,7 +12,7 @@ class navToSelect {
     this.$element = $(element);
     this._isBuilded = false;
 
-    this.options = $.extend(DEFAULTS, options);
+    this.options = $.extend({}, DEFAULTS, options);
     this.init();
   }
 
@@ -109,7 +109,7 @@ class navToSelect {
   }
 
   trigger(eventType, ...params) {
-    let data = [this].concat(...params);
+    let data = [this].concat(params);
 
     // event
     this.$element.trigger(`${NAMESPACE}::${eventType}`, data);
@@ -121,7 +121,7 @@ class navToSelect {
     let onFunction = `on${eventType}`;
 
     if (typeof this.options[onFunction] === 'function') {
-      this.options[onFunction].apply(this, ...params);
+      this.options[onFunction].apply(this, params);
     }
   }
 

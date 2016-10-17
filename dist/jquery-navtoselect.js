@@ -1,5 +1,5 @@
 /**
-* jQuery NavToSelect v0.5.0
+* jQuery NavToSelect v0.5.1
 * https://github.com/amazingSurge/jquery-navToSelect
 *
 * Copyright (c) amazingSurge
@@ -146,7 +146,7 @@
         this.$element = (0, _jquery2.default)(element);
         this._isBuilded = false;
 
-        this.options = _jquery2.default.extend(DEFAULTS, options);
+        this.options = _jquery2.default.extend({}, DEFAULTS, options);
         this.init();
       }
 
@@ -267,13 +267,11 @@
       }, {
         key: 'trigger',
         value: function trigger(eventType) {
-          var _ref;
-
           for (var _len = arguments.length, params = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
             params[_key - 1] = arguments[_key];
           }
 
-          var data = (_ref = [this]).concat.apply(_ref, params);
+          var data = [this].concat(params);
 
           // event
           this.$element.trigger(NAMESPACE$1 + '::' + eventType, data);
@@ -288,9 +286,7 @@
           var onFunction = 'on' + eventType;
 
           if (typeof this.options[onFunction] === 'function') {
-            var _options$onFunction;
-
-            (_options$onFunction = this.options[onFunction]).apply.apply(_options$onFunction, [this].concat(params));
+            this.options[onFunction].apply(this, params);
           }
         }
       }, {
@@ -319,7 +315,7 @@
     _jquery2.default.navToSelect = navToSelect;
 
     var info = {
-      version: '0.5.0'
+      version: '0.5.1'
     };
 
     var NAMESPACE = 'navToSelect';

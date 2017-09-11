@@ -1,5 +1,5 @@
 /**
-* jQuery NavToSelect v0.5.1
+* jQuery NavToSelect v0.5.2
 * https://github.com/amazingSurge/jquery-navToSelect
 *
 * Copyright (c) amazingSurge
@@ -201,7 +201,7 @@ class navToSelect {
 $$1.navToSelect = navToSelect;
 
 var info = {
-  version:'0.5.1'
+  version:'0.5.2'
 };
 
 const NAMESPACE = 'navToSelect';
